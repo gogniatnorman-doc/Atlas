@@ -207,7 +207,8 @@ def generate_svg_elevation(elevations, color):
     min_e, max_e = min(elevations), max(elevations)
     diff = max_e - min_e if max_e > min_e else 1
     
-    pts = [f"{(i/(len(elevations)-1))*w:.1f},{h - ((ele-min_e)/diff)*h:.1f}" for i, enumerate in enumerate(elevations)]
+    # CORRECTION : i, ele au lieu de i, enumerate
+    pts = [f"{(i/(len(elevations)-1))*w:.1f},{h - ((ele-min_e)/diff)*h:.1f}" for i, ele in enumerate(elevations)]
     poly_pts = pts + [f"{w},{h}", f"0,{h}"]
     
     return f'''
@@ -1370,6 +1371,11 @@ def main_menu():
                 print("   git add .")
                 print("   git commit -m \"Mise a jour de l'Atlas public\"")
                 print("   git push")
+                print("\n 💡 LEXIQUE VS CODE (Lettres à côté des fichiers) :")
+                print("   [U] Untracked : Nouveau fichier que Git découvre (ex: .gitignore).")
+                print("   [M] Modified  : Fichier existant que tu as modifié.")
+                print("   [D] Deleted   : Fichier retiré du cloud (ex: tes données privées).")
+                print("   [A] Added     : Fichier prêt à décoller après un 'git add .' !")
                 print("═"*55)
                 print(" 👉 Ton site sera en ligne d'ici 2 à 3 minutes sur GitHub Pages !")
             elif choix == "4":
